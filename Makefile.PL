@@ -175,6 +175,10 @@ Force assumption of specified Oracle version
 If == 8 then we don't use the new OCI_INIT code
 and we force our emulation of OCILobWriteAppend.
 
+=item --notaf
+
+Disables support for TAF.
+
 =back
 
 =cut
@@ -202,9 +206,10 @@ $::opt_w = 0;	# enable many gcc compiler warnings
 $::opt_V = 0;   # force assumption of specified Oracle version
 		# If == 8 then we don't use the new OCI_INIT code
 		# and we force our emulation of OCILobWriteAppend
+$::opt_notaf = 0;   # disable TAF support
 
 Getopt::Long::config( qw( no_ignore_case ) );
-GetOptions(qw(b! r=s v! d! g! p! l! c! f! F! W! w! m=s h=s n=s s=s S=s V=s ))
+GetOptions(qw(b! r=s v! d! g! p! l! c! f! F! W! w! m=s h=s n=s s=s S=s V=s notaf!))
   or die pod2usage( -verbose => 99, -sections => [ 'OPTIONS' ] );
 
 $::opt_g &&= '-g';	# convert to actual string
@@ -216,6 +221,8 @@ if ($::opt_W) {
     open MK_PM, ">/dev/null" or die "Unable to create 'mk.pm': $!";
     exit WriteMakefile( dbd_edit_mm_attribs(\%opts) )
 }
+
+$opts{DEFINE} .= ' -DNOTAF' if $::opt_notaf;
 
 # --- Introduction
 
@@ -749,9 +756,6 @@ if ($::opt_g && $^O eq "MSWin32" && $Config::Config{cc} eq "cl") {
 $opts{DEFINE} .= ' -Wall -Wno-comment' if $Config{gccversion};
 
 $opts{DEFINE} .= ' -Xa' if $Config{cc} eq 'clcc';	# CenterLine CC
-
-
-
 
 
 

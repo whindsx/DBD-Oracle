@@ -15,34 +15,23 @@ $| = 1;
 # create a database handle
 my $dsn = oracle_test_dsn();
 my $dbuser = $ENV{ORACLE_USERID} || 'scott/tiger';
-my $dbh;
-eval {$dbh = DBI->connect($dsn, $dbuser, '',)};
-if ($dbh) {
-    if ($dbh->ora_can_taf()){
-      plan tests => 1;  
-    }
-    else {
-       plan tests =>1;      
-    }
-} else {
+
+my $dbh = eval { DBI->connect($dsn, $dbuser, '', ) } or 
     plan skip_all => "Unable to connect to Oracle";
-}
+
+plan tests => 1;
 
 $dbh->disconnect;
 
-if (!$dbh->ora_can_taf()){
-    
-  eval {$dbh = DBI->connect($dsn, $dbuser, '',{ora_taf=>1,taf_sleep=>15,ora_taf_function=>'taf'})};   
-  ok($@    =~ /You are attempting to enable TAF/, "'$@' expected! ");      
-  
-    
+if (!$dbh->ora_can_taf ){
+  eval {$dbh = DBI->connect($dsn, $dbuser, '',{ora_taf=>1,taf_sleep=>15,ora_taf_function=>'taf'}) };   
+  like $@, qr/You are attempting to enable TAF|TAF support has been disabled for this instance of DBD::Oracle/, 
+    'TAF not enabled';
 }
 else {
-   ok($dbh = DBI->connect($dsn, $dbuser, '',{ora_taf=>1,taf_sleep=>15,ora_taf_function=>'taf'}),"Well this is all I can test!");         
+   ok DBI->connect($dsn, $dbuser, '',{ora_taf=>1,taf_sleep=>15,ora_taf_function=>'taf'}), 
+     "basic connection";         
     
 }
 
 $dbh->disconnect;
-#not much I can do with taf as I cannot really shut down somones server pephaps later
-
-1;

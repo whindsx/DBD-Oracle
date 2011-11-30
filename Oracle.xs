@@ -357,6 +357,9 @@ ora_can_taf(dbh)
 	sword status;
 	ub4 can_taf = 0;
 	CODE:
+#ifdef NOTAF
+    XSRETURN_IV(0);
+#else
 	OCIAttrGet_log_stat(imp_dbh->srvhp, OCI_HTYPE_SERVER, &can_taf, NULL,
 				OCI_ATTR_TAF_ENABLED, imp_dbh->errhp, status);
 	if (status != OCI_SUCCESS) {
@@ -366,6 +369,7 @@ ora_can_taf(dbh)
 	else {
 		XSRETURN_IV(can_taf);
 	}
+#endif
 
 void
 ora_ping(dbh)

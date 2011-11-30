@@ -901,6 +901,9 @@ dbd_db_login6(SV *dbh, imp_dbh_t *imp_dbh, char *dbname, char *uid, char *pwd, S
 
 
     if (imp_dbh->using_taf){
+#ifdef  NOTAF
+        croak("TAF support has been disabled for this instance of DBD::Oracle\n");
+#else
 		bool	can_taf;
 		OCIAttrGet_log_stat(imp_dbh->srvhp, OCI_HTYPE_SERVER, &can_taf, NULL,
 				OCI_ATTR_TAF_ENABLED, imp_dbh->errhp, status);
@@ -918,6 +921,7 @@ dbd_db_login6(SV *dbh, imp_dbh_t *imp_dbh, char *dbname, char *uid, char *pwd, S
 				"Setting TAF Callback Failed! ");
 			return 0;
 		}
+#endif
 	}
 
 	return 1;
