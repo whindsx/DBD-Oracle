@@ -6,8 +6,6 @@ META.json
 META.yml
 Makefile.PL
 Oracle.h
-Oracle.pm
-Oracle.xs
 Oraperl.pm
 README
 README-files/hpux/Makefile-Lincoln
@@ -46,6 +44,8 @@ hints/macos_bundle.syms
 hints/macos_lib.syms
 hints/macos_syms.pl
 hints/svr4.pl
+lib/DBD/Oracle.pm
+lib/DBD/Oracle.xs
 lib/DBD/Oracle/GetInfo.pm
 lib/DBD/Oracle/Object.pm
 lib/DBD/Oracle/Troubleshooting.pm
