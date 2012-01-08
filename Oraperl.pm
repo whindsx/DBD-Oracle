@@ -22,6 +22,15 @@ require 5.004;
 use DBI 1.22;
 use Exporter;
 
+warn <<'END_WARNING';
+************************ WARNING **************************
+Oraperl is deprecated, and is planned to be removed from the 
+DBD::Oracle distribution by June 2012.
+
+Please consider migrating your scripts to using DBI and its 
+DBD::Oracle driver directly.
+END_WARNING
+
 $VERSION = substr(q$Revision: 1.44 $, 10);
 
 @ISA = qw(Exporter);
@@ -294,8 +303,8 @@ text instead:
 
 
 The use of I<Oraperl> is deprecated in favor of L<DBD::Oracle>,
-and will be removed from the I<DBD::Oracle> distribution as of 
-1.38.
+and is scheduled to be removed from the I<DBD::Oracle> distribution as of 
+June 2012.
 
 =head2 Principal Functions
 
