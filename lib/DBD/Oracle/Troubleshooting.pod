@@ -1,5 +1,5 @@
-package DBD::Oracle::Troubleshooting;
-# ABSTRACT: Tips and Hints to Troubleshoot DBD::Oracle
+#PODNAME: DBD::Oracle::Troubleshooting 
+#ABSTRACT: Tips and Hints to Troubleshoot DBD::Oracle
 
 
 __END__
@@ -7,15 +7,11 @@ __END__
 
 =head1 NAME
 
-DBD::Oracle::Troubleshooting - Tips and Hints to Troubleshoot DBD::Oracle
+DBD::Oracle::Troubleshooting  - Tips and Hints to Troubleshoot DBD::Oracle
 
 =head1 VERSION
 
 version 1.40
-
-=head1 NAME
-
-DBD::Oracle::Troubleshooting - Tips and Hints to Troubleshoot DBD::Oracle
 
 =head1 CONNECTING TO ORACLE
 
