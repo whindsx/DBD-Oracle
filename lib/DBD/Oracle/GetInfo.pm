@@ -1,4 +1,10 @@
 package DBD::Oracle::GetInfo;
+{
+  $DBD::Oracle::GetInfo::VERSION = '1.40';
+}
+BEGIN {
+  $DBD::Oracle::GetInfo::AUTHORITY = 'cpan:PYTHIAN';
+}
 # ABSTRACT: Wrapper to get Oracle information
 
 use strict;

@@ -1,4 +1,10 @@
 package DBD::Oracle::Object;
+{
+  $DBD::Oracle::Object::VERSION = '1.40';
+}
+BEGIN {
+  $DBD::Oracle::Object::AUTHORITY = 'cpan:PYTHIAN';
+}
 # ABSTRACT: Wrapper for Oracle objects
 
 use strict;

@@ -1,6 +1,6 @@
 Revision history for DBD::Oracle
 
-{{$NEXT}}
+1.40      2012-03-09
 
  [BUG FIXES]
  - Applied patch from Rafael Kitover (Caelum) to column_info to handle
