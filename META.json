@@ -51,31 +51,31 @@
    "provides" : {
       "DBD::Oracle" : {
          "file" : "lib/DBD/Oracle.pm",
-         "version" : "1.40"
+         "version" : "1.42"
       },
       "DBD::Oracle::GetInfo" : {
          "file" : "lib/DBD/Oracle/GetInfo.pm",
-         "version" : "1.40"
+         "version" : "1.42"
       },
       "DBD::Oracle::Object" : {
          "file" : "lib/DBD/Oracle/Object.pm",
-         "version" : "1.40"
+         "version" : "1.42"
       },
       "DBD::Oracle::Troubleshooting" : {
          "file" : "lib/DBD/Oracle/Troubleshooting.pm",
-         "version" : "1.40"
+         "version" : "1.42"
       },
       "DBD::Oracle::db" : {
          "file" : "lib/DBD/Oracle.pm",
-         "version" : "1.40"
+         "version" : "1.42"
       },
       "DBD::Oracle::dr" : {
          "file" : "lib/DBD/Oracle.pm",
-         "version" : "1.40"
+         "version" : "1.42"
       },
       "DBD::Oracle::st" : {
          "file" : "lib/DBD/Oracle.pm",
-         "version" : "1.40"
+         "version" : "1.42"
       }
    },
    "release_status" : "stable",
@@ -91,7 +91,7 @@
          "web" : "http://github.com/yanick/DBD-Oracle/tree"
       }
    },
-   "version" : "1.40",
+   "version" : "1.42",
    "x_authority" : "cpan:PYTHIAN"
 }
 

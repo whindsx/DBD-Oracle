@@ -1,11 +1,11 @@
 package DBD::Oracle::Troubleshooting;
 {
-  $DBD::Oracle::Troubleshooting::VERSION = '1.40';
+  $DBD::Oracle::Troubleshooting::VERSION = '1.42';
 }
 BEGIN {
   $DBD::Oracle::Troubleshooting::AUTHORITY = 'cpan:PYTHIAN';
 }
-# ABSTRACT: Tips and Hints to Troubleshoot DBD::Oracle
+#ABSTRACT: Tips and Hints to Troubleshoot DBD::Oracle
 
 
 __END__
@@ -17,7 +17,7 @@ DBD::Oracle::Troubleshooting - Tips and Hints to Troubleshoot DBD::Oracle
 
 =head1 VERSION
 
-version 1.40
+version 1.42
 
 =head1 CONNECTING TO ORACLE
 
@@ -96,26 +96,6 @@ for more gory details.
 
 Some examples related to the use of LONG types are available in
 the C<examples/> directory of the distribution.
-
-=head1 Can't find I<libclntsh.so>
-
-I<libclntsh.so> is the shared
-library composed of all the other Oracle libs you used to have to
-statically link.
-libclntsh.so should be in I<$ORACLE_HOME/lib>.  If it's missing, try
-running I<$ORACLE_HOME/lib/genclntsh.sh> and it should create it.
-
-Never copy I<libclntsh.so> to a different machine or Oracle version.
-If DBD::Oracle was built on a machine with a different path to I<libclntsh.so>
-then you'll need to set set an environment variable, typically
-I<LD_LIBRARY_PATH>, to include the directory containing I<libclntsh.so>.
-
-I<LD_LIBRARY_PATH> is typically ignored if the script is running set-uid
-(which is common in some httpd/CGI configurations).  In this case
-either rebuild with I<LD_RUN_PATH> set to include the path to I<libclntsh>
-or create a symbolic link so that I<libclntsh> is available via the same
-path as it was when the module was built. (On Solaris the command
-"ldd -s Oracle.so" can be used to see how the linker is searching for it.)
 
 =head1 LINUX
 

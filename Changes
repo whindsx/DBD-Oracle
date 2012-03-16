@@ -1,6 +1,6 @@
 Revision history for DBD::Oracle
 
-1.40      2012-03-09
+1.42      2012-03-16
 
  [BUG FIXES]
  - Applied patch from Rafael Kitover (Caelum) to column_info to handle
@@ -10,10 +10,25 @@ Revision history for DBD::Oracle
    DBD::Oracle. The default maximum size is now 1Mb; above that you
    will still have to set LongReadLen (Martin J. Evans)
 
+ - Fixed 70meta and rt74753-utf8-encoded to not die if you cannot
+   connect to Oracle or you cannot install from cpan if you have not
+   set up a valid Oracle connection.
+
+ - Fixed 75163. Bfile lobs were not being opened before fetching if
+   ora_auto_lobs was disabled (Martin J. Evans).
+
+   Note: this has a minor impact on non bfile lobs when ora_auto_lobs
+   is not in force as an additional call to OCILobFileIsOpen will be
+   made.
+ 
+ - Start removing DBIS usage (Martin J. Evans).
 
  [DOCUMENTATION]
  - clarification of when StrictlyTyped/DiscardString can be used and
    LongReadLen (Martin J. Evans)
+
+1.42      2012-03-13
+ - skip rt74753-utf8-encoded.t if db is not unicode
 
 1.40      2012-03-08
  - promote 1.39_00 to official release
