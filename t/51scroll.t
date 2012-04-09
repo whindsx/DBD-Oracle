@@ -48,7 +48,7 @@ $sql = "INSERT INTO ".$table." VALUES (?)";
 
 $sth =$dbh-> prepare($sql);
 
-for ($i=1;$i<=10;$i++){
+for my $i (1..10){
    $sth-> bind_param(1, $i);
    $sth->execute();
 }
@@ -58,66 +58,68 @@ ok($sth=$dbh->prepare($sql,{ora_exe_mode=>OCI_STMT_SCROLLABLE_READONLY,ora_prefe
 ok ($sth->execute());
 
 #first loop all the way forward with OCI_FETCH_NEXT
-for($i=1;$i<=10;$i++){
+for my $i ( 1..10 ) { 
    $value =  $sth->ora_fetch_scroll(OCI_FETCH_NEXT,0);
-   cmp_ok($value->[0], '==', $i, '... we should get the next record');
+   is $value->[0] => $i, '... we should get the next record';
 }
 
 
 $value =  $sth->ora_fetch_scroll(OCI_FETCH_CURRENT,0);
-cmp_ok($value->[0], '==', 10, '... we should get the 10th record');
+is $value->[0] => 10, '... we should get the 10th record';
 
 #now loop all the way back
-for($i=1;$i<=9;$i++){
+for my $i ( reverse 1..9 ) {
    $value =  $sth->ora_fetch_scroll(OCI_FETCH_PRIOR,0);
-   cmp_ok($value->[0], '==', 10-$i, '... we should get the prior record');
+   is $value->[0] => $i, '... we should get the prior record';
 }
 
 #now +4 records relative from the present position of 0;
 
 $value =  $sth->ora_fetch_scroll(OCI_FETCH_RELATIVE,4);
-cmp_ok($value->[0], '==', 5, '... we should get the 5th record');
+is $value->[0] => 5, '... we should get the 5th record';
 
 #now +2 records relative from the present position of 4;
 
 $value =  $sth->ora_fetch_scroll(OCI_FETCH_RELATIVE,2);
-cmp_ok($value->[0], '==', 7, '... we should get the 7th record');
+is $value->[0] => 7, '... we should get the 7th record';
 
 #now -3 records relative from the present position of 6;
 
 $value =  $sth->ora_fetch_scroll(OCI_FETCH_RELATIVE,-3);
 
-cmp_ok($value->[0], '==', 4, '... we should get the 4th record');
+is $value->[0] => 4, '... we should get the 4th record';
 
 #now get the 9th record from the start
 $value =  $sth->ora_fetch_scroll(OCI_FETCH_ABSOLUTE,9);
 
-cmp_ok($value->[0], '==', 9, '... we should get the 9th record');
+is $value->[0] => 9, '... we should get the 9th record';
 
 #now get the last record
 
 $value =  $sth->ora_fetch_scroll(OCI_FETCH_LAST,0);
 
-cmp_ok($value->[0], '==', 10, '... we should get the 10th record');
+is $value->[0] => 10, '... we should get the 10th record';
 
 #now get the ora_scroll_position
 
-cmp_ok($sth->ora_scroll_position(), '==', 10, '... we should get the 10 for the ora_scroll_position');
+is $sth->ora_scroll_position => 10, '... we should get the 10 for the ora_scroll_position';
 
 #now back to the first
 
-$value =  $sth->ora_fetch_scroll(OCI_FETCH_FIRST,0);
-cmp_ok($value->[0], '==', 1, '... we should get the 1st record');
+$value = $sth->ora_fetch_scroll(OCI_FETCH_FIRST,0);
+is $value->[0] => 1, '... we should get the 1st record';
 
 #check the ora_scroll_position one more time
 
-cmp_ok($sth->ora_scroll_position(), '==', 1, '... we should get the 1 for the ora_scroll_position');
+is $sth->ora_scroll_position => 1, '... we should get the 1 for the ora_scroll_position';
 
-$sth->finish();
+my $other_value =  $sth->ora_fetch_scroll(OCI_FETCH_LAST,0);
+is $other_value->[0] => 10, 'fetched the last value';
+is $value->[0] => 1, q{...which shouldn't change the first one};
+
+
+$sth->finish;
 drop_table($dbh);
 
 
 $dbh->disconnect;
-
-1;
-
