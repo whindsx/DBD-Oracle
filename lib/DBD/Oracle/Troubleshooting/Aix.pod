@@ -1,6 +1,18 @@
 #PODNAME: DBD::Oracle::Troubleshooting::Aix
 #ABSTRACT: Tips and Hints to Troubleshoot DBD::Oracle on AIX
 
+__END__
+
+=pod
+
+=head1 NAME
+
+DBD::Oracle::Troubleshooting::Aix - Tips and Hints to Troubleshoot DBD::Oracle on AIX
+
+=head1 VERSION
+
+version 1.57_00
+
 =head1 Using Visual Age 7 C Compiler 
 
 Oracle 9i is only certified as a 64-bit application on AIX 5L (5.1,5.2,5.3) with 32-bit support;
@@ -38,7 +50,6 @@ Now perform normal commands to perform the testing/making:
 I've tested the basics of the DBD-Oracle and it seems fully functional.
 
 Stephen de Vries
-
 
 =head1 Using gcc C Compiler 
 
@@ -118,7 +129,6 @@ Stephen de Vries
     5) make should be clean, make test should pass.
     This setup worked with 8.1.7 w/32 bit support, and with 9.2.0 w/ 32-bit support.
     --Adrian Terranova
-
 
 =head1 Using xlc_r C Compiler 
 
@@ -247,4 +257,33 @@ Stephen de Vries
 
     --------------------------------------------------------------------------------------
 
+=head1 AUTHORS
 
+=over 4
+
+=item *
+
+Tim Bunce <timb@cpan.org>
+
+=item *
+
+John Scoles
+
+=item *
+
+Yanick Champoux <yanick@cpan.org>
+
+=item *
+
+Martin J. Evans <mjevans@cpan.org>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 1994 by Tim Bunce.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
