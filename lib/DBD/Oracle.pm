@@ -11,6 +11,12 @@ my $ORACLE_ENV  = ($^O eq 'VMS') ? 'ORA_ROOT' : 'ORACLE_HOME';
 
 {
 package DBD::Oracle;
+{
+  $DBD::Oracle::VERSION = '1.64';
+}
+BEGIN {
+  $DBD::Oracle::AUTHORITY = 'cpan:PYTHIAN';
+}
 # ABSTRACT: Oracle database driver for the DBI module
 
     use DBI ();
@@ -1139,6 +1145,15 @@ SQL
 
 __END__
 
+=pod
+
+=head1 NAME
+
+DBD::Oracle - Oracle database driver for the DBI module
+
+=head1 VERSION
+
+version 1.64
 
 =head1 SYNOPSIS
 
@@ -1152,7 +1167,6 @@ __END__
 
   # for some advanced uses you may need Oracle type values:
   use DBD::Oracle qw(:ora_types);
-
 
 =head1 DESCRIPTION
 
@@ -1260,7 +1274,6 @@ To connect without TNSNAMES.ORA file, you can use an EZCONNECT url, of the form:
 If port name is not specified, 1521 is the default. If service name is not specified, the hostname will be used as a service name.
 
 The following examples show several ways a connection can be created:
-
 
   $dbh = DBI->connect('dbi:Oracle:DB','username','password');
 
@@ -1616,7 +1629,6 @@ DBDOxxxx where xxxx is the current version number. This value can be
 retrieved on the server side using V$SESSION_CONNECT_INFO or
 GV$SESSION_CONNECT_INFO
 
-
   my $dbh = DBI->connect($dsn, $user, $passwd, { ora_driver_name => 'ModPerl_1' });
 
   $dbh->{ora_driver_name} = $q;
@@ -1796,7 +1808,6 @@ Will pad bloggs out to 8 characters and return the username.
 If the previous error was from a failed C<prepare> due to a syntax error,
 this attribute gives the offset into the C<Statement> attribute where the
 error was found.
-
 
 =head4 ora_array_chunk_size
 
@@ -2020,7 +2031,6 @@ DBMS_OUTPUT.PUT, or DBMS_OUTPUT.NEW_LINE.
 Starts a new session against the current database using the credentials
 supplied.
 
-
 =head2 B<private_attribute_info>
 
   $hashref = $dbh->private_attribute_info();
@@ -2153,7 +2163,6 @@ DBI currently defaults this to 80.
 
 Implemented by DBI, no driver-specific impact.
 
-
 =head2 B<CompatMode>
 
 Type: boolean, inherited
@@ -2161,7 +2170,6 @@ Type: boolean, inherited
 The CompatMode attribute is used by emulation layers (such as Oraperl) to enable compatible behaviour in the underlying driver (e.g., DBD::Oracle) for this handle. Not normally set by application code.
 
 It also has the effect of disabling the 'quick FETCH' of attribute values from the handles attribute cache. So all attribute values are handled by the drivers own FETCH method. This makes them slightly slower but is useful for special-purpose drivers like DBD::Multiplex.
-
 
 =head1 ORACLE-SPECIFIC DATABASE HANDLE METHODS
 
@@ -2347,7 +2355,6 @@ The different types of placeholders cannot be mixed within a statement, but you 
 use different ones for each statement handle you have. This is confusing at best, so
 stick to one style within your program.
 
-
 =head2 B<prepare_cached>
 
   $sth = $dbh->prepare_cached($statement, \%attr);
@@ -2365,7 +2372,6 @@ Prepare and execute a single statement. Returns the number of rows affected if t
 query was successful, returns undef if an error occurred, and returns -1 if the
 number of rows is unknown or not available. Note that this method will return B<0E0> instead
 of 0 for 'no rows were affected', in order to always return a true value if no error occurred.
-
 
 =head2 B<last_insert_id>
 
@@ -2421,7 +2427,6 @@ relying on the default rollback behavior.
 If the script exits before disconnect is called (or, more precisely, if the database handle is no longer
 referenced by anything), then the database handle's DESTROY method will call the rollback() and disconnect()
 methods automatically. It is best to explicitly disconnect rather than rely on this behavior.
-
 
 =head2 B<ping>
 
@@ -2775,7 +2780,6 @@ Examples:
   ## This executes the statement with 567 (integer) and "Zool" (varchar)
   $sth->execute();
 
-
 These attributes may be used in the C<\%attr> parameter of the
 L<DBI/bind_param> or L<DBI/bind_param_inout> statement handle methods.
 
@@ -2870,9 +2874,7 @@ Set L</ora_check_sql> to 0 in prepare() to enable this behaviour.
 
   $rv = $sth->bind_param_inout($param_num, \$scalar, 0);
 
-
 DBD::Oracle fully supports bind_param_inout below are some uses for this method.
-
 
 =head3 B<Returning A Value from an INSERT>
 
@@ -3047,10 +3049,6 @@ the above example, the code would look something like this :
     ...
   }
 
-
-
-
-
 =head3 B<SYS.DBMS_SQL datatypes>
 
 DBD::Oracle has built-in support for B<SYS.DBMS_SQL.VARCHAR2_TABLE>
@@ -3089,8 +3087,6 @@ and B<SYS.DBMS_SQL.NUMBER_TABLE> datatypes. The simple example is here:
    will only take a reference to a scalar.
 
 =back
-
-
 
 =head3 B<ORA_VARCHAR2_TABLE>
 
@@ -3200,7 +3196,6 @@ you get:
 
 DBD::Oracle supports this undocumented feature of DBI. See L</Returning A Value from an INSERT> for an example.
 
-
 =head2 B<bind_param_array>
 
   $rv = $sth->bind_param_array($param_num, $array_ref_or_value)
@@ -3209,8 +3204,6 @@ DBD::Oracle supports this undocumented feature of DBI. See L</Returning A Value 
 
 Binds an array of values to a placeholder, so that each is used in turn by a call
 to the L</execute_array> method.
-
-
 
 =head2 B<execute>
 
@@ -3478,7 +3471,6 @@ However, LOBSs, CLOBSs, and BLOBs do work as do all the regular bind, and fetch 
 Only use scrollable cursors if you really have a good reason to. They do use up considerable
 more server and client resources and have poorer response times than non-scrolling cursors.
 
-
 =head2 Enabling Scrollable Cursors
 
 To enable this functionality you must first import the 'Fetch Orientation' and the 'Execution Mode' constants by using;
@@ -3493,7 +3485,6 @@ statement handle to 'OCI_STMT_SCROLLABLE_READONLY' with the prepare method;
 When the statement is executed you will then be able to use 'ora_fetch_scroll' method to get a row
 or you can still use any of the other fetch methods but with a poorer response time than if you used a
 non-scrolling cursor. As well scrollable cursors are compatible with any applicable bind methods.
-
 
 =head2 Scrollable Cursor Methods
 
@@ -3833,7 +3824,6 @@ You can tune this value by setting ora_oci_success_warn which will display the f
   20(characters), BufLen 80(characters), Got 28(characters)
 
 In the case above the query Got 28 characters (well really only 20 characters of 28 bytes) so we could use ora_ncs_buff_mtpl=>2 (20*2=40) thus saving 40bytes of memory.
-
 
 =head3 Simple Fetch for CLOBs and BLOBs
 
@@ -4242,7 +4232,6 @@ Uses the Oracle OCILobTrim function.
 Returns the length of the LOB.
 Uses the Oracle OCILobGetLength function.
 
-
 =item ora_lob_is_init
 
   $is_init = $dbh->ora_lob_is_init($lob_locator);
@@ -4288,7 +4277,6 @@ It also assumes a sequence for use in generating unique
 lob_id field values, defined as follows:
 
    CREATE SEQUENCE lob_example_seq
-
 
 =head3 Example: Inserting a new row with large data
 
@@ -4355,7 +4343,6 @@ can't be used effectively if AutoCommit is enabled).
       $offset += $length;
    }
 
-
 In this example we demonstrate the use of ora_lob_write()
 interactively to append data to the columns 'bin_data' and
 'char_data'.  Had we used ora_lob_append(), we could have
@@ -4371,7 +4358,6 @@ into the lobs.  The snippet of code beneath the comment
 The scalar variables $offset and $length are no longer
 needed, because ora_lob_append() keeps track of the offset
 for us.
-
 
 =head3 Example: Updating an existing row with large data
 
@@ -4557,7 +4543,6 @@ WE8ISO8859P1 or WE8MSWIN1252.  To use any character set with Oracle
 other than US7ASCII, requires that the NLS_LANG environment variable be set.
 See the L<"Oracle UTF8 is not UTF-8"> section below.
 
-
 You are strongly urged to read the Oracle Internationalization documentation
 specifically with respect the choices and trade offs for creating
 a databases for use with international character sets.
@@ -4664,7 +4649,6 @@ If the C<ora_csform> attribute is given to bind_param() then that
 determines if the value should be assumed to be in the default
 (NLS_LANG) or NCHAR (NLS_NCHAR) client character set.
 
-
    use DBD::Oracle qw( SQLCS_IMPLICIT SQLCS_NCHAR );
    ...
    $sth->bind_param(1, $value, { ora_csform => SQLCS_NCHAR });
@@ -4704,7 +4688,6 @@ DBD::Oracle supports only the 'selection' of embedded objects of the following t
 and TABLE in any combination. Support is seamless and recursive, meaning you
 need only supply a simple SQL statement to get all the values in an embedded object.
 You can either get the values as an array of scalars or they can be returned into a DBD::Oracle::Object.
-
 
 Array example, given this type and table;
 
@@ -4857,7 +4840,6 @@ done for an individual connection by doing:
 There are some types, like BOOLEAN, that Oracle does not automatically
 convert to or from strings (pity).  These need to be converted
 explicitly using SQL or PL/SQL functions.
-
 
 Examples:
 
@@ -5448,7 +5430,6 @@ There is a known problem with the 11.2g Oracle client and the
 C<DBMS_LOB.GETLENGTH()> PL/SQL function.
 See L<https://rt.cpan.org/Public/Bug/Display.html?id=69350> for the details.
 
-
 =head1 SEE ALSO
 
 =over
@@ -5515,5 +5496,34 @@ The DBD::Oracle module is Copyright (c) 2011 John Scoles. Canada.
 
 The DBD::Oracle module is free open source software; you can
 redistribute it and/or modify it under the same terms as Perl 5.
+
+=head1 AUTHORS
+
+=over 4
+
+=item *
+
+Tim Bunce <timb@cpan.org>
+
+=item *
+
+John Scoles <byterock@cpan.org>
+
+=item *
+
+Yanick Champoux <yanick@cpan.org>
+
+=item *
+
+Martin J. Evans <mjevans@cpan.org>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 1994 by Tim Bunce.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
