@@ -1,6 +1,18 @@
 #PODNAME: DBD::Oracle::Troubleshooting::Win32
 #ABSTRACT: Tips and Hints to Troubleshoot DBD::Oracle on Win32
 
+__END__
+
+=pod
+
+=head1 NAME
+
+DBD::Oracle::Troubleshooting::Win32 - Tips and Hints to Troubleshoot DBD::Oracle on Win32
+
+=head1 VERSION
+
+version 1.67_00
+
 =head1 GENERAL INFO
 
 In general, on Windows, it's best to just use ActiveState Perl and the
@@ -135,7 +147,6 @@ Windows platform having no Oracle or other development environment installed.
 
     21) You should now be able to run DBD-Oracle on you system
 
-
 =head1 09/30 2006 from asu 
 
 DBD::Oracle 1.18a
@@ -162,7 +173,6 @@ local $ENV{ORACLE_HOME} = '';
 in line 1463 immediately before sqlplus is called (but I cannot tell if
 this fails for full client installations)
 
-
 11/30/05 -- John Scoles 
 I have confirmed that this Makefile.pl will work for both Oracle InstantClient
 10.2.0.1 & 10.1.0.4 using same process the Andy Hassall uses. Starting with a clean OD
@@ -186,7 +196,6 @@ If one happens to have visual studio installed you may not have to download addi
 Oracle 10XE
 No big problem here as 10XE seems to use the instantclient as well. Just ensure your
  NLS_LANG and ORACLE_HOME are set to the same directory that 10XE uses
-
 
 10/07/05 --John Scoles
 Andy Hassall kindly added some changes to the Makefile.PL
@@ -219,8 +228,6 @@ up his environment and the steps he preformed to get it to compile.
 
   D:\cygwin\home\andyh\src\pythian>perl Makefile.PL
 
-
-
 4/27/04 -- Jeff Urlwin
 
 Do not untar this distribution in a directory with spaces.  This will not work.
@@ -237,3 +244,33 @@ before running Makefile.PL.  Since the registry location of the current
 Oracle Home is in different locations in different Oracle versions,
 it is usually safer to set ORACLE_HOME before running Makefile.PL.
 
+=head1 AUTHORS
+
+=over 4
+
+=item *
+
+Tim Bunce <timb@cpan.org>
+
+=item *
+
+John Scoles <byterock@cpan.org>
+
+=item *
+
+Yanick Champoux <yanick@cpan.org>
+
+=item *
+
+Martin J. Evans <mjevans@cpan.org>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 1994 by Tim Bunce.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
