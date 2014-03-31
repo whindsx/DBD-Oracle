@@ -1,5 +1,14 @@
 Revision history for DBD::Oracle
 
+1.71_00   2014-03-31
+    - Recognizes __CYGWIN64__. (RT88709, reported by Witold Petriczek)
+    - CHOOSE hint is deprecated. (RT91217, reported by Andy Bucksch, 
+        fix by Martin J Evans)
+    - Set UTF8 flag per-connection. (RT88185, reported by Heinrich Mislik, patch by Martin
+      J. Evans)
+    - Add a CONTRIBUTING.mkd file. (GH#2)
+    - Add SELinux trick. (RT#87003, patch submitted by Mike Doherty)
+
 1.70   2014-02-12
   - promote 1.69_02 to stable.
 
@@ -17,7 +26,7 @@ Revision history for DBD::Oracle
 
    - OCI_THREADED setting had been accidentally removed, causing potential
     crashes when using threads. (RT#92229, Martin J. Evans, reported 
-    by Detlef L¸tticke)
+    by Detlef L√ºtticke)
 
   - When using fetch*_hashref the values are decoded but
     not the keys so if you have unicode column names they were not
@@ -389,8 +398,8 @@ Revision history for DBD::Oracle
  [DOCUMENTATION]
  - Mention the release of Oracle Instant Client 64 bit which does not work
     on Lion. (Martin J. Evans)
- - fix DBD::Oracle::GetInfo blurb (patch by Juli·n Moreno PatiÒo) [rt74000]
- - fix typos. (patch by Juli·n Moreno PatiÒo) [rt73999]
+ - fix DBD::Oracle::GetInfo blurb (patch by Juli√°n Moreno Pati√±o) [rt74000]
+ - fix typos. (patch by Juli√°n Moreno Pati√±o) [rt73999]
  - add troubleshoot doc and diag for error with bequeather. [rt75263]
 
  [OTHERS]
@@ -405,7 +414,7 @@ Revision history for DBD::Oracle
 
  [ENHANCEMENTS]
   - added SYSASM session mode. [RT651211] (patch from
-  Anthony DeRobertis, reported by Juli·n Moreno PatiÒo)
+  Anthony DeRobertis, reported by Juli√°n Moreno Pati√±o)
 
  [BUG FIXES]
 
@@ -443,7 +452,7 @@ Changes in DBD-Oracle 1.35_00 (18-11-2011)
  - Added notes to bind_col documenting the fact that setting a TYPE
    does not affect how the column is bound in Oracle, only what
    happens after the column data is retrieved (Martin J. Evans)
- - fix typo (thanks to Juli·n Moreno PatiÒo) [RT72038]
+ - fix typo (thanks to Juli√°n Moreno Pati√±o) [RT72038]
  - shuffle POD around to improve documentation flow [RT72252]
  - major tidying up of the connect() documentation. (by Gwen Shapira)
  - Moved LONG examples out of POD and into examples/
@@ -582,7 +591,7 @@ Changes in DBD-Oracle 1.29_1
   This release has been prepared specifically for the 'Debian' http://www.debian.org project.  It contains no changes
   to functionality or usage.  The following has been changed
 
-  Fixed some formatting and typos in Pod from Juli·n PatiÒo
+  Fixed some formatting and typos in Pod from Juli√°n Pati√±o
   The Copyright terms for ora_explain have changed and now read as follows:
     You may distribute under the terms of either the GNU General Public
     License or the Artistic License, as specified in the Perl README file.
@@ -631,7 +640,7 @@ Changes in DBD-Oracle 1.29_1
   Fix for rt.cpan.org Ticket #=21920 Bug with Oracle DBD for Mac OS X Instant Client From boingolover
   Added a few more constants to get rid of magic numbers from John Scoles
   Fix for rt.cpan.org Ticket #=38267 Inserts/Updates to BLOB's via synonyms fails from John Scoles
-  Fix for rt.cpan.org Ticket #=39603 build problem and fix missing functions in oci.def from Zolt·n SebestyÈn
+  Fix for rt.cpan.org Ticket #=39603 build problem and fix missing functions in oci.def from Zolt√°n Sebesty√©n
   Fix for rt.cpan.org Ticket #=39374 Makefile.PL: error when reducing echo messages from make from Tippa
   Fix for rt.cpan.org Ticket #=39232 binding large XMLTYPE fails on 64-bit perl from Jeff Klein
   Fix for rt.cpan.org Ticket #=38749 Warning of a NULL column in an aggregate function also added ora_oci_success_warn to display silent OCI warnings from John Scoles
