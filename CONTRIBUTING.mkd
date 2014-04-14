@@ -1,6 +1,6 @@
 # CONTRIBUTING
 
-Thank you for considering contributing to {{ $dist }}. 
+Thank you for considering contributing to DBD-Oracle. 
 This file contains instructions that will help you work with 
 the source code.
 
@@ -39,12 +39,12 @@ patches you have.
 
 You may need to satisfy some dependencies. The easiest way to satisfy
 dependencies is to install the last release -- this is available at
-https://metacpan.org/release/{{ $dist }}.
+https://metacpan.org/release/DBD-Oracle.
 
 If you use cpanminus, you can do it without downloading the tarball first:
 
 ``` bash
-$ cpanm --reinstall --installdeps --with-recommends {{ $dist =~ s/-/::/gr }}
+$ cpanm --reinstall --installdeps --with-recommends DBD::Oracle
 ```
 
 Dist::Zilla is a very powerful authoring tool, but requires a number of
@@ -68,7 +68,7 @@ $ dzil listdeps --author --missing | cpanm
 You can also do this via cpanm directly:
 
 ``` bash
-$ cpanm --reinstall --installdeps --with-develop --with-recommends {{ $dist =~ s/-/::/gr }}
+$ cpanm --reinstall --installdeps --with-develop --with-recommends DBD::Oracle
 ```
 
 Once installed, here are some dzil commands you might try:
