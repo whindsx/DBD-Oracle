@@ -1,6 +1,20 @@
 #PODNAME: DBD::Oracle::Troubleshooting::Macos
 #ABSTRACT: Tips and Hints to Troubleshoot DBD::Oracle on MacOs
 
+__END__
+
+=pod
+
+=encoding UTF-8
+
+=head1 NAME
+
+DBD::Oracle::Troubleshooting::Macos - Tips and Hints to Troubleshoot DBD::Oracle on MacOs
+
+=head1 VERSION
+
+version 1.73_00
+
 =head1 General Info 
 
 These instructions allow for the compilation and successful testing of
@@ -182,7 +196,6 @@ sudo perl -MCPAN -e shell
 install DBI
 
 Now you're all set - enjoy your perly oracley new life
-
 
 =head1 Instructions for 10.2.x (Jaguar)
 
@@ -514,7 +527,6 @@ Earlier and original instructions thanks to:
 	Steve Sapovits
 	Tom Mornini
 
-
 Date: Tue, 15 Apr 2003 16:02:17 +1000
 Subject: Compilation bug in DBI on OSX with threaded Perl 5.8.0
 From: Danial Pearce 
@@ -556,3 +568,34 @@ anything Apple are going to do about it.
 
 cheers
 Danial
+
+=head1 AUTHORS
+
+=over 4
+
+=item *
+
+Tim Bunce <timb@cpan.org>
+
+=item *
+
+John Scoles <byterock@cpan.org>
+
+=item *
+
+Yanick Champoux <yanick@cpan.org>
+
+=item *
+
+Martin J. Evans <mjevans@cpan.org>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 1994 by Tim Bunce.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
