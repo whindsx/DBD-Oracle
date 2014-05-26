@@ -369,10 +369,10 @@ ub4 ora_parse_uid _((imp_dbh_t *imp_dbh, char **uidp, char **pwdp));
 char *ora_sql_error _((imp_sth_t *imp_sth, char *msg));
 char *ora_env_var(char *name, char *buf, unsigned long size);
 
-#ifdef __CYGWIN32__
+#ifdef __CYGWIN__
 void ora_cygwin_set_env(char *name, char *value);
 
-#endif /* __CYGWIN32__ */
+#endif
 
 sb4 dbd_phs_in _((dvoid *octxp, OCIBind *bindp, ub4 iter, ub4 index,
 			  dvoid **bufpp, ub4 *alenp, ub1 *piecep, dvoid **indpp));

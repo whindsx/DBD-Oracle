@@ -13,10 +13,10 @@
 #define strcasecmp strcmpi
 #endif
 
-#ifdef __CYGWIN32__
+#ifdef __CYGWIN__
 #include "w32api/windows.h"
 #include "w32api/winbase.h"
-#endif /* __CYGWIN32__ */
+#endif 
 
 #include "Oracle.h"
 
@@ -164,7 +164,7 @@ ora_env_var(char *name, char *buf, unsigned long size)
 	return buf;
 }
 
-#ifdef __CYGWIN32__
+#ifdef __CYGWIN__
 /* Under Cygwin there are issues with setting environment variables
  * at runtime such that Windows-native libraries loaded by a Cygwin
  * process can see those changes.
@@ -190,7 +190,7 @@ ora_cygwin_set_env(char *name, char *value)
 {
 	SetEnvironmentVariable(name, value);
 }
-#endif /* __CYGWIN32__ */
+#endif
 
 
 void
