@@ -1110,6 +1110,8 @@ sub read_sysliblist {
        $syslibs =~ s/\s*-ldld\b//g;
        $linkwith =~ m/-lcl\b/ or
            $syslibs =~ s/\s*-lcl\b//g;
+    } elsif ($syslibs eq '') {
+       $syslibs = " -lnnz18 -lnnz12 -lons -lclntshcore -lipc1 -lmql1";
     }
     return $syslibs;
 }
