@@ -17,7 +17,7 @@ use Pod::Usage;
 # For those not using Dynamic loading this means building a
 # new static perl in the DBI directory by saying 'make perl'
 # and then using _that_ perl to make this one.
-use DBI 1.51;
+use DBI 1.623;
 use DBI::DBD;	# DBD creation tools
 
 
@@ -45,7 +45,7 @@ my %opts = (
     NAME => 'DBD::Oracle',
     VERSION_FROM => 'lib/DBD/Oracle.pm',
     PREREQ_PM => { "Test::Simple" => 0.90, # actually Test::More pkg in T::S dist
-                   "DBI"          => 1.51},
+                   "DBI"          => 1.623},
     OBJECT => '$(O_FILES)',
     DEFINE => '',
     DIR  => [],
@@ -56,21 +56,17 @@ my %opts = (
 	COMPRESS	=> 'gzip -v9', SUFFIX => 'gz',
     },
     META_MERGE => {
-       configure_requires => { "DBI" => '1.51' },
-       build_requires => {"DBI" => '1.51',
+       configure_requires => { "DBI" => '1.623' },
+       build_requires => {"DBI" => '1.623',
                           "ExtUtils::MakeMaker" => 0,
                           "Test::Simple" => '0.90'},
        resources => {
-           bugtracker => {
-               mailto => 'bug-dbd-oracle at rt.cpan.org',
-               web =>
-                'http://rt.cpan.org/Public/Dist/Display.html?Name=DBD-Oracle',
-           },
-           homepage => 'http://search.cpan.org/dist/DBD-Oracle',
+           bugtracker => 'https://github.com/perl5-dbi/DBD-Oracle/issues',
+           homepage => 'https://metacpan.org/pod/DBD::Oracle',
            repository => {
                type => 'git',
-               url => 'git://github.com/yanick/DBD-Oracle.git',
-               web => 'http://github.com/yanick/DBD-Oracle/tree',
+               url => 'git://github.com/perl5-dbi/DBD-Oracle.git',
+               web => 'http://github.com/perl5-dbi/DBD-Oracle',
            },
        },
     },
@@ -81,7 +77,7 @@ $eumm =~ tr/_//d;
 if ($eumm >= 5.43) {
     $opts{AUTHOR} = 'Tim Bunce (dbi-users@perl.org)';
     $opts{ABSTRACT_FROM} = 'lib/DBD/Oracle.pm';
-    $opts{PREREQ_PM} = { DBI => 1.51 };
+    $opts{PREREQ_PM} = { DBI => 1.623 };
     $opts{CAPI} = 'TRUE' if $Config{archname} =~ /-object\b/i;
 }
 
@@ -100,7 +96,6 @@ my %mk_target_rules;
 =item -b
 
 Try to use Oracle's own 'build' rule. Defaults to true.
-
 
 =item -r
 
@@ -979,6 +974,13 @@ sub find_oracle_home {
 	@oh = grep { (glob("$_/../lib*/libclntsh.$so*"))[0] } @path;
 	s:/[^/]/?$:: for @oh;
     }
+    if (!@oh && lc($^O) eq 'linux') { # Try the standard Linux RPM location
+   my @loh = glob("/usr/lib/oracle/*/*/lib/libclntsh.$so*");
+   @loh = sort { $a cmp $b } @loh;
+   my $loh = pop(@loh);
+   $loh =~ s/\/lib\/libclntsh.*$//g;
+   push(@oh,$loh);
+    }
     print "Found @oh\n" if @oh;
     return $oh[0];
 }
@@ -1123,7 +1125,7 @@ sub ora_libdir {
     if ( $client_version >= 9 ) {
         $libdir = 'lib32' if ! perl_is_64bit() and -d "$OH/lib32";
         $libdir = 'lib/64' if perl_is_64bit() and -d "$OH/lib/64";
-           # Solaris OIC 12+ from pkg 
+           # Solaris OIC 12+ from pkg
     }
     else {
         $libdir = 'lib64' if   perl_is_64bit() and -d "$OH/lib64";
@@ -1544,6 +1546,7 @@ sub find_headers {
        "$OH/plsql", # oratypes.h sometimes here (eg HPUX 11.23 Itanium Oracle 9.2.0),
        # --- Oracle SDK Instant Client locations
        "$OH/sdk/include",
+       "$OH/include",
        # --- Oracle RPM Instant Client locations
        map { ( $_, $_."64"   ) }
        map { ( $_, "/usr$_" ) }
@@ -1691,6 +1694,9 @@ sub get_client_version {
 	elsif ( "$OH/" =~ m!/10g!) { # scary but handy
 	    $client_version_full = "10.0.0.0";
 	}
+   elsif ( "$OH/" =~ m!/usr/lib/oracle/(\d+\.\d)/!) { # Linux RPM
+       $client_version_full = "$1.0.0";
+   }
     }
 
     if ($force_version && $force_version ne $client_version_full) {
