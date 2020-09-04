@@ -262,9 +262,9 @@ before_script:
 script:
   - perl Makefile.PL
   - make
-#  - make test
-  - prove -bv -r -s -j1 $(test-files)
-  - ORACLE_USERID_2="" prove -bv t/60reauth.t
+  - make test
+#  - prove -bv -r -s -j1 $(test-files)
+#  - ORACLE_USERID_2="" prove -bv t/60reauth.t
 #  - dzil smoke --release --author
 
 after_success:
