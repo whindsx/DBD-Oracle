@@ -23,8 +23,8 @@ jobs:
       ORACLE_DSN: 'dbi:Oracle://localhost:1521/XE'
     steps:
       - uses: actions/checkout@v2
+      - run: apt-get install -y libaio1 sudo net-tools bc
 # FYI Oracle XE only comes in utf8, so we can't run USASCII version of tests
-      - run: apt-get install -y libaio1 sudo
       - run: sudo -E maint/scripts/01_install_oracle_xe.bash
       - run: sudo -E maint/scripts/02_install_oracle_instantclient.bash
       - run: . /etc/profile
