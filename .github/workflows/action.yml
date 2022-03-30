@@ -25,8 +25,8 @@ jobs:
       - uses: actions/checkout@v2
 # FYI Oracle XE only comes in utf8, so we can't run USASCII version of tests
       - run: apt-get install -y libaio1
-      - run: maint/scripts/01_install_oracle_xe.bash
-      - run: maint/scripts/02_install_oracle_instantclient.bash
+      - run: sudo maint/scripts/01_install_oracle_xe.bash
+      - run: sudo maint/scripts/02_install_oracle_instantclient.bash
       - run: . /etc/profile
       - run: cpanm DBI
       - run: cpanm Test::NoWarnings
