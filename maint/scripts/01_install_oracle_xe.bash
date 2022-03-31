@@ -31,7 +31,7 @@ echo -e "pga_aggregate_target=200540160\nsga_target=601620480" >> /u01/app/oracl
 echo -e "pga_aggregate_target=200540160\nsga_target=601620480" >> /u01/app/oracle/product/11.2.0/xe/config/scripts/initXETemp.ora
 
 # Now configure Oracle XE
-printf 8080\\n1521\\nadminpass\\nadminpass\\ny\\n | /etc/init.d/oracle-xe configure
+printf 8080\\n1521\\nadminpass\\nadminpass\\ny\\n | /etc/init.d/oracle-xe configure || tail -n +1 /u01/app/oracle/product/11.2.0/xe/config/log/*
 
 # Replace the containers hostname with 0.0.0.0
 sed -i 's/'$(hostname)'/0.0.0.0/g' /u01/app/oracle/product/11.2.0/xe/network/admin/listener.ora
