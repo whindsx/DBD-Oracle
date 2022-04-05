@@ -23,7 +23,6 @@ jobs:
     env:
       ORACLEV: 19.6
       ORACLE_USERID: kermit/foobar
-      ORACLE_USERID_2: mspiggy/barfoo
       ORACLE_DSN: 'dbi:Oracle://oracle:1521/XEPDB1'
     services:
       # Oracle service (label used to access the service container)
@@ -53,6 +52,5 @@ jobs:
       - run: sudo -E maint/scripts/02_install_oracle_instantclient.bash
       - run: . /etc/profile
       - run: perl -V
-      - run: cpanm DBI
-      - run: cpanm Test::NoWarnings
+      - run: cpanm DBI Test::NoWarnings
       - run: perl Makefile.PL && make && make test
