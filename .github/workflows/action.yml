@@ -43,4 +43,4 @@ jobs:
       - run: apt-get update -y
       - run: apt-get install -y netcat
       - run: perl -V
-      - run: nc -zv 127.0.0.1 1521
+      - run: nc -zv oracle 1521
