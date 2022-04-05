@@ -16,20 +16,31 @@ jobs:
     container:
       image: perldocker/perl-tester:latest
     env:
-      ORACLEV: 19.6
-      ORACLEDBV: 11.2
       ORACLE_USERID: kermit/foobar
       ORACLE_USERID_2: mspiggy/barfoo
-      ORACLE_DSN: 'dbi:Oracle://localhost:1521/XE'
+      ORACLE_DSN: 'dbi:Oracle://localhost:1521/XEPDB1'
+    services:
+      # Oracle service (label used to access the service container)
+      oracle:
+        # Docker Hub image (feel free to change the tag "latest" to any other available one)
+        image: gvenzl/oracle-xe:latest
+        # Provide passwords and other environment variables to container
+        env:
+          ORACLE_PASSWORD: adminpass
+          APP_USER: kermit
+          APP_USER_PASSWORD: foobar
+        # Forward Oracle port
+        ports:
+          - 1521:1521
+        # Provide healthcheck script options for startup
+        options: >-
+          --health-cmd healthcheck.sh
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
     steps:
       - uses: actions/checkout@v2
-      - run: apt-get install -y sudo libaio1 libaio-dev net-tools bc
-# FYI Oracle XE only comes in utf8, so we can't run USASCII version of tests
-      - run: df -h; cat /proc/meminfo; uname -a; cat /etc/*-release
-#      - run: sudo -E maint/scripts/01_install_oracle_xe.bash
-#      - run: tail -n +1 /u01/app/oracle/product/11.2.0/xe/config/log/*
-#      - run: sudo -E maint/scripts/02_install_oracle_instantclient.bash
-#      - run: . /etc/profile
-#      - run: cpanm DBI
-#      - run: cpanm Test::NoWarnings
-#      - run: perl Makefile.PL && make && make test
+      - run: apt-get update -y
+      - run: apt-get install -y netcat
+      - run: perl -V
+      - run: nc -zv 127.0.0.1 1521
