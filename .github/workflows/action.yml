@@ -18,7 +18,7 @@ jobs:
     env:
       ORACLE_USERID: kermit/foobar
       ORACLE_USERID_2: mspiggy/barfoo
-      ORACLE_DSN: 'dbi:Oracle://localhost:1521/XEPDB1'
+      ORACLE_DSN: 'dbi:Oracle://oracle:1521/XEPDB1'
     services:
       # Oracle service (label used to access the service container)
       oracle:
@@ -41,6 +41,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: apt-get update -y
-      - run: apt-get install -y netcat
+      - run: apt-get install -y libaio1 libaio-dev bc sudo netcat net-tools
       - run: perl -V
       - run: nc -zv oracle 1521
