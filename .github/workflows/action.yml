@@ -21,7 +21,7 @@ jobs:
     container:
       image: perldocker/perl-tester:latest
     env:
-      ORACLEV: 19.6
+      ORACLEV: latest
       ORACLE_USERID: kermit/foobar
       ORACLE_DSN: 'dbi:Oracle://oracle:1521/XEPDB1'
     services:
@@ -46,8 +46,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: apt-get update -y
-      - run: apt-get install -y libaio1 libaio-dev bc sudo
-      - run: sudo -E maint/scripts/02_install_oracle_instantclient.bash
+      - run: apt-get install -y libaio1 libaio-dev bc sudo alien
+      - run: sudo -E maint/scripts/03_install_oracle_instantclient_rpm.bash
       - run: . /etc/profile
       - run: perl -V
       - run: cpanm DBI Test::NoWarnings
