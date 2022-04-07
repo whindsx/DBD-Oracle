@@ -4,8 +4,7 @@ set -ex
 
 if [ "$ORACLEV" = "latest" ]; then
    # Get lastest RPMs from Oracle Client permanent links
-   #for i in "basic" "devel" "sqlplus"; do
-   for i in "basic" ; do
+   for i in "basic" "devel" "sqlplus"; do
       wget --quiet "https://download.oracle.com/otn_software/linux/instantclient/oracle-instantclient-$i-linuxx64.rpm"
    done
 
