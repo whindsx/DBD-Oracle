@@ -2,6 +2,11 @@
 
 set -ex
 
+# Latest OIC is handled in 03_install_oracle_instantclient_rpm.bash
+if [ "$ORACLEV" == "latest" ]; then
+   exit
+fi
+
 if [ "$ORACLEV" == "11.2" ]; then
     export LONGV="11.2.0.4.0"
 fi
