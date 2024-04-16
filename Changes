@@ -2,6 +2,7 @@ Revision history for DBD::Oracle
 
 {{$NEXT}}
 
+  Specify resources metadata explicitly in dist.ini (HG#162, Graham Knop)
   Ensure dbivport.h is installed- (GH#150, Wesley Hinds)
   Add DBI to ConfigureRequires, BuildRequires, and Test Requires - (GH#155)
   Move from TravisCI to Github Actions (GHA) - (PR#152, Wesley Hinds)
