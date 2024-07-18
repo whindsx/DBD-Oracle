@@ -8,11 +8,11 @@ if [ "$ORACLEV" = "latest" ]; then
       wget --quiet "https://download.oracle.com/otn_software/linux/instantclient/oracle-instantclient-$i-linuxx64.rpm"
    done
 
-   # Convert rpm to deb pkgs 
+   # Convert rpm to deb pkgs
    alien -k *.rpm
    dpkg -i *.deb
 
-   ls -l /usr/lib/oracle/21/client64
+   find /usr/lib/oracle
 
    ORACLEV=$(ls /usr/lib/oracle | sed 's/\///')
 
