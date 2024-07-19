@@ -51,5 +51,5 @@ jobs:
       - run: . /etc/profile
       - run: perl -V
       - run: cpanm DBI # DBI must be installed before we can build a DBD. 
-      - run: cpanm --installdeps . -v 
+      - run: cpanm --installdeps .
       - run: perl Makefile.PL && make && make test
