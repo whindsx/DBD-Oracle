@@ -45,6 +45,7 @@ my %opts = (
     NAME => 'DBD::Oracle',
     VERSION_FROM => 'lib/DBD/Oracle.pm',
     PREREQ_PM => { "Test::Simple" => 0.90, # actually Test::More pkg in T::S dist
+                   "Test::NoWarnings" => 1.06,
                    "DBI"          => 1.623},
     OBJECT => '$(O_FILES)',
     DEFINE => '',
@@ -59,7 +60,8 @@ my %opts = (
        configure_requires => { "DBI" => '1.623' },
        build_requires => {"DBI" => '1.623',
                           "ExtUtils::MakeMaker" => 0,
-                          "Test::Simple" => '0.90'},
+                          "Test::Simple" => '0.90',
+                          "Test::NoWarnings" => 1.06},
     },
 );
 my $eumm = $ExtUtils::MakeMaker::VERSION;
