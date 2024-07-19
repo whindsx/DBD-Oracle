@@ -45,7 +45,7 @@ my %opts = (
     NAME => 'DBD::Oracle',
     VERSION_FROM => 'lib/DBD/Oracle.pm',
     PREREQ_PM => { "Test::Simple" => 0.90, # actually Test::More pkg in T::S dist
-                   "Test::NoWarnings" => 1.06,
+                   "Test::NoWarnings" => 1.00,
                    "DBI"          => 1.623},
     OBJECT => '$(O_FILES)',
     DEFINE => '',
@@ -61,20 +61,15 @@ my %opts = (
        build_requires => {"DBI" => '1.623',
                           "ExtUtils::MakeMaker" => 0,
                           "Test::Simple" => '0.90',
-                          "Test::NoWarnings" => 1.06},
+                          "Test::NoWarnings" => "1.00"},
     },
 );
-my $eumm = $ExtUtils::MakeMaker::VERSION;
-$eumm =~ tr/_//d;
 
-if ($eumm >= 5.43) {
-    $opts{AUTHOR} = 'Tim Bunce (dbi-users@perl.org)';
-    $opts{ABSTRACT_FROM} = 'lib/DBD/Oracle.pm';
-    $opts{PREREQ_PM} = { DBI => 1.623 };
-    $opts{CAPI} = 'TRUE' if $Config{archname} =~ /-object\b/i;
-}
+$opts{AUTHOR} = 'Tim Bunce (dbi-users@perl.org)';
+$opts{ABSTRACT_FROM} = 'lib/DBD/Oracle.pm';
+$opts{CAPI} = 'TRUE' if $Config{archname} =~ /-object\b/i;
 
-$opts{LICENSE} = 'perl' if $eumm >= 6.3002;
+$opts{LICENSE} = 'perl';
 $opts{CCFLAGS} = "-P $Config{ccflags}" if $Config{cc} eq 'bcc32';  # force C++
 $opts{LINKTYPE} = 'static' if $Config{dlsrc} =~ /dl_none/;
 
