@@ -50,5 +50,5 @@ jobs:
       - run: sudo -E maint/scripts/03_install_oracle_instantclient_rpm.bash
       - run: . /etc/profile
       - run: perl -V
-      - run: cpanm DBI
+      - run: cpanm --installdeps . 
       - run: perl Makefile.PL && make && make test
